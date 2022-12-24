@@ -15,7 +15,9 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-
+app.get('/', (req, res) => {
+	res.send('Running');
+});
 
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
@@ -35,15 +37,15 @@ io.on("connection", (socket) => {
 
 
 //fron-end
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (_, res) {
-	res.sendFile(
-		path.join(__dirname, "./client/build/index.html"),
-		function (err) {
-			res.status(500).send(err);
-		}
-	);
-});
+// app.use(express.static(path.join(__dirname, "./client/build")));
+// app.get("*", function (_, res) {
+// 	res.sendFile(
+// 		path.join(__dirname, "./client/build/index.html"),
+// 		function (err) {
+// 			res.status(500).send(err);
+// 		}
+// 	);
+// });
 
 server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
